@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedFolder: URL?
-    @State private var folderContents: [String] = []
+    @State private var folderContents: [URL] = []
     @State private var errorMessage: String?
 
     var body: some View {
@@ -19,7 +19,7 @@ struct ContentView: View {
 
                 if !folderContents.isEmpty {
                     List(folderContents, id: \.self) { file in
-                        Text(file)
+                        Text(file.absoluteString)
                     }
                     .padding(.top, 10)
                 }
@@ -60,13 +60,14 @@ struct ContentView: View {
     func fetchFolderContents(from url: URL) {
         do {
             let fileManager = FileManager.default
-            let files = try fileManager.contentsOfDirectory(atPath: url.path)
+            
+            let files = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
             DispatchQueue.main.async {
                 folderContents = files
             }
         } catch {
-            errorMessage = "フォルダの内容を取得中にエラーが発生しました: \(error.localizedDescription)"
             DispatchQueue.main.async {
+                errorMessage = "フォルダの内容を取得中にエラーが発生しました: \(error.localizedDescription)"
                 folderContents = []
             }
         }
