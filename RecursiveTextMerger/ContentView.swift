@@ -61,9 +61,11 @@ struct ContentView: View {
         do {
             let fileManager = FileManager.default
             let files = try fileManager.contentsOfDirectory(atPath: url.path)
-            folderContents = files
+            DispatchQueue.main.async {
+                folderContents = files
+            }
         } catch {
-            errorMessage = "フォルダの内容を取得中にエラーが発生しました。"
+            errorMessage = "フォルダの内容を取得中にエラーが発生しました: \(error.localizedDescription)"
             folderContents = []
         }
     }
