@@ -13,7 +13,7 @@ struct ContentView: View {
             }
 
             if let folder = selectedFolder {
-                Text("選択されたフォルダ: \(folder.path)")
+                Text("フォルダが選択されました: \(folder.path)")
                     .padding(.top, 10)
             }
 
@@ -32,16 +32,18 @@ struct ContentView: View {
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = false
-        panel.begin { response in
-            if response == .OK, let url = panel.url {
-                selectedFolder = url
-                errorMessage = nil
-            } else if response == .cancel {
-                selectedFolder = nil
-                errorMessage = "フォルダの選択がキャンセルされました。"
-            } else {
-                selectedFolder = nil
-                errorMessage = "不明なエラーが発生しました。"
+        DispatchQueue.main.async {
+            panel.begin { response in
+                if response == .OK, let url = panel.url {
+                    selectedFolder = url
+                    errorMessage = nil // Reset error message when a new folder is selected
+                } else if response == .cancel {
+                    selectedFolder = nil
+                    errorMessage = "フォルダの選択がキャンセルされました。"
+                } else {
+                    selectedFolder = nil
+                    errorMessage = "選択中に予期しないエラーが発生しました。再試行してください。"
+                }
             }
         }
     }
