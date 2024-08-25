@@ -11,11 +11,12 @@ class FolderViewModel: ObservableObject {
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = false
-        panel.begin { response in
+        Task { @MainActor in
+            let response = await panel.begin()
             if response == .OK, let url = panel.url {
                 self.selectedFolder = url
                 self.errorMessage = nil // Reset error message when a new folder is selected
-                self.fetchFolderContents(from: url)
+                await self.fetchFolderContents(from: url)
             } else if response == .cancel {
                 self.selectedFolder = nil
                 self.errorMessage = "フォルダの選択がキャンセルされました。"
@@ -26,14 +27,18 @@ class FolderViewModel: ObservableObject {
         }
     }
 
-    private func fetchFolderContents(from url: URL) {
+    private func fetchFolderContents(from url: URL) async {
         do {
             let fileManager = FileManager.default
             let files = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
-            self.folderContents = files
+            Task { @MainActor in
+                self.folderContents = files
+            }
         } catch {
-            self.errorMessage = "フォルダの内容を取得中にエラーが発生しました。"
-            self.folderContents = []
+            Task { @MainActor in
+                self.errorMessage = "フォルダの内容を取得中にエラーが発生しました。"
+                self.folderContents = []
+            }
         }
     }
 }
