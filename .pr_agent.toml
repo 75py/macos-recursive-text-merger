@@ -7,7 +7,11 @@ fallback_models=["gpt-4o-mini"]
 extra_instructions="Please use Japanese."
 
 [pr_reviewer]
-extra_instructions="Please use Japanese."
+extra_instructions="""
+- 日本語を使ってください。
+- MVVM (Model-View-ViewModel) アーキテクチャパターンに従っているかどうかを確認してください。"""
 
 [pr_code_suggestions]
-extra_instructions="Please use Japanese."
+extra_instructions="""
+- 日本語を使ってください。
+- MVVM (Model-View-ViewModel) アーキテクチャパターンに従っているかどうかを確認してください。"""
