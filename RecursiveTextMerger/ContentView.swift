@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedFolder: URL?
+    @State private var folderContents: [URL] = []
     @State private var errorMessage: String?
 
     var body: some View {
@@ -15,6 +16,13 @@ struct ContentView: View {
             if let folder = selectedFolder {
                 Text("フォルダが選択されました: \(folder.path)")
                     .padding(.top, 10)
+
+                if !folderContents.isEmpty {
+                    List(folderContents, id: \.self) { file in
+                        Text(file.absoluteString)
+                    }
+                    .padding(.top, 10)
+                }
             }
 
             if let errorMessage = errorMessage {
@@ -37,6 +45,7 @@ struct ContentView: View {
                 if response == .OK, let url = panel.url {
                     selectedFolder = url
                     errorMessage = nil // Reset error message when a new folder is selected
+                    fetchFolderContents(from: url)
                 } else if response == .cancel {
                     selectedFolder = nil
                     errorMessage = "フォルダの選択がキャンセルされました。"
@@ -44,6 +53,22 @@ struct ContentView: View {
                     selectedFolder = nil
                     errorMessage = "選択中に予期しないエラーが発生しました。再試行してください。"
                 }
+            }
+        }
+    }
+    
+    func fetchFolderContents(from url: URL) {
+        do {
+            let fileManager = FileManager.default
+            
+            let files = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+            DispatchQueue.main.async {
+                folderContents = files
+            }
+        } catch {
+            DispatchQueue.main.async {
+                errorMessage = "フォルダの内容を取得中にエラーが発生しました: \(error.localizedDescription)"
+                folderContents = []
             }
         }
     }
