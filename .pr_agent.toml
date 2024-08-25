@@ -12,4 +12,6 @@ extra_instructions="""
 - MVVM (Model-View-ViewModel) アーキテクチャパターンに従っているかどうかを確認してください。"""
 
 [pr_code_suggestions]
-extra_instructions="Please use Japanese."
+extra_instructions="""
+- 日本語を使ってください。
+- MVVM (Model-View-ViewModel) アーキテクチャパターンに従っているかどうかを確認してください。"""
