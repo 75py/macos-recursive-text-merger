@@ -2,3 +2,9 @@
 model="gpt-4o-mini"
 model_turbo="gpt-4o-mini"
 fallback_models=["gpt-4o-mini"]
+
+[pr_description]
+extra_instructions="Please use Japanese."
+
+[pr_reviewer]
+extra_instructions="Please use Japanese."
