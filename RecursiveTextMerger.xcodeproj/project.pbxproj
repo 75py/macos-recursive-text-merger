@@ -45,6 +45,7 @@
 		E25842C32C7B09EF00A06A8F /* RecursiveTextMergerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecursiveTextMergerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E25842C72C7B09EF00A06A8F /* RecursiveTextMergerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveTextMergerUITests.swift; sourceTree = "<group>"; };
 		E25842C92C7B09EF00A06A8F /* RecursiveTextMergerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveTextMergerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E25842D72C7B0E5300A06A8F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +76,7 @@
 		E258429F2C7B09ED00A06A8F = {
 			isa = PBXGroup;
 			children = (
+				E25842D72C7B0E5300A06A8F /* README.md */,
 				E25842AA2C7B09ED00A06A8F /* RecursiveTextMerger */,
 				E25842BC2C7B09EF00A06A8F /* RecursiveTextMergerTests */,
 				E25842C62C7B09EF00A06A8F /* RecursiveTextMergerUITests */,
