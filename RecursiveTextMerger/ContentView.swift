@@ -27,18 +27,14 @@ class FolderViewModel: ObservableObject {
         }
     }
 
-    private func fetchFolderContents(from url: URL) async {
+    @MainActor private func fetchFolderContents(from url: URL) async {
         do {
             let fileManager = FileManager.default
             let files = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
-            Task { @MainActor in
-                self.folderContents = files
-            }
+            self.folderContents = files
         } catch {
-            Task { @MainActor in
-                self.errorMessage = "フォルダの内容を取得中にエラーが発生しました。"
-                self.folderContents = []
-            }
+            self.errorMessage = "フォルダの内容を取得中にエラーが発生しました: \(error.localizedDescription)"
+            self.folderContents = []
         }
     }
 }
