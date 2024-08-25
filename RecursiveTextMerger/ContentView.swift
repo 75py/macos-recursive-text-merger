@@ -66,7 +66,9 @@ struct ContentView: View {
             }
         } catch {
             errorMessage = "フォルダの内容を取得中にエラーが発生しました: \(error.localizedDescription)"
-            folderContents = []
+            DispatchQueue.main.async {
+                folderContents = []
+            }
         }
     }
 }
