@@ -42,6 +42,8 @@ class FolderViewModel: ObservableObject {
 struct ContentView: View {
     @StateObject private var viewModel = FolderViewModel()
 
+    @State private var selectedFile : String?
+
     var body: some View {
         VStack {
             Button(action: {
@@ -67,8 +69,31 @@ struct ContentView: View {
                     .foregroundColor(.red)
                     .padding(.top, 10)
             }
+
+            Button(action: {
+                selectFile()
+            }) {
+                Text("ファイルを選択")
+            }
+            if let selectedFile = selectedFile {
+                Text(selectedFile)
+            }
         }
         .padding()
+    }
+
+    private func selectFile() {
+        DispatchQueue.main.async {
+            let panel = NSOpenPanel()
+            panel.directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            panel.canChooseFiles = true
+            panel.canChooseDirectories = false
+            panel.allowsMultipleSelection = false
+            if panel.runModal() == .OK {
+                // ③選択されたファイル名の表示
+                self.selectedFile = panel.url?.lastPathComponent ?? ""
+            }
+        }
     }
 }
 
