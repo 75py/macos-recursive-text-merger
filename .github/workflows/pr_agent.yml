@@ -12,6 +12,8 @@ jobs:
       contents: write
     name: Run pr agent on every pull request, respond to user comments
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Read review guidelines
         id: read_guidelines
         run: echo "REVIEW_GUIDELINES=$(cat review_guidelines.md)" >> $GITHUB_ENV
