@@ -16,12 +16,20 @@ jobs:
         uses: actions/checkout@v3
       - name: Read review guidelines
         id: read_guidelines
-        run: echo "REVIEW_GUIDELINES=$(cat review_guidelines.md)" >> $GITHUB_ENV
+        run: |
+          REVIEW_GUIDELINES=$(cat review_guidelines.md)
+          echo "REVIEW_GUIDELINES<<EOF" >> $GITHUB_ENV
+          echo "$REVIEW_GUIDELINES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
       - name: PR Agent action step
         id: pragent
         uses: Codium-ai/pr-agent@main
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_REVIEWER.EXTRA_INSTRUCTIONS: 'Please use Japanese. ${{ env.EXTRA_INSTRUCTIONS }}'
-          PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: 'Please use Japanese. ${{ env.EXTRA_INSTRUCTIONS }}'
+          PR_REVIEWER.EXTRA_INSTRUCTIONS: |
+            Please use Japanese. 
+            ${{ env.REVIEW_GUIDELINES }}
+          PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: |
+            Please use Japanese. 
+            ${{ env.REVIEW_GUIDELINES }}
