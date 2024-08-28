@@ -10,14 +10,3 @@ auto_improve = true
 
 [pr_description]
 extra_instructions="Please use Japanese."
-
-[pr_reviewer]
-extra_instructions="""
-- 日本語を使ってください。
-- MVVM (Model-View-ViewModel) アーキテクチャパターンに従っているかどうかを確認してください。"""
-
-[pr_code_suggestions]
-extra_instructions="""
-- 日本語を使ってください。
-- MVVM (Model-View-ViewModel) アーキテクチャパターンに従っているかどうかを確認してください。
-- DispatchQueueではなく、Swift Concurrencyを使用するよう提案してください。"""
