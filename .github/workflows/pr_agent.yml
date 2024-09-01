@@ -34,5 +34,5 @@ jobs:
             **All responses, including `issue_content` and `suggestion`, must be entirely in Japanese. No English should be used in any part of the output.** 
             ${{ env.REVIEW_GUIDELINES }}
           PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: |
-            Answer in japanese. 
+            **All responses, including `suggestion_content` and `one_sentence_summary`, must be entirely in Japanese. No English should be used in any part of the output.** 
             ${{ env.REVIEW_GUIDELINES }}
