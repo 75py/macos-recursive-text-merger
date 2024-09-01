@@ -9,12 +9,11 @@ auto_describe = false
 auto_improve = true
 
 [pr_description]
-extra_instructions="Please use Japanese."
+extra_instructions="Answer in Japanese."
 
 [pr_reviewer]
-num_code_suggestions=10
-inline_code_comments=true
+num_code_suggestions=5
 
 [pr_code_suggestions]
-num_code_suggestions=10
-num_code_suggestions_per_chunk=10
+num_code_suggestions=5
+num_code_suggestions_per_chunk=5
