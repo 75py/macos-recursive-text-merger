@@ -10,3 +10,11 @@ auto_improve = true
 
 [pr_description]
 extra_instructions="Please use Japanese."
+
+[pr_reviewer]
+num_code_suggestions=10
+inline_code_comments=true
+
+[pr_code_suggestions]
+num_code_suggestions=10
+num_code_suggestions_per_chunk=10
