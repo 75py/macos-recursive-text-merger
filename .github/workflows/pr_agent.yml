@@ -12,12 +12,15 @@ jobs:
       contents: write
     name: Run pr agent on every pull request, respond to user comments
     steps:
-      - name: Checkout repository
+      - name: Checkout wiki
         uses: actions/checkout@v3
+        with:
+          repository: ${{github.repository}}.wiki
+          path: ./.github/wiki/
       - name: Read review guidelines
         id: read_guidelines
         run: |
-          REVIEW_GUIDELINES=$(cat review_guidelines.md)
+          REVIEW_GUIDELINES=$(cat ./.github/wiki/レビュー観点.md)
           echo "REVIEW_GUIDELINES<<EOF" >> $GITHUB_ENV
           echo "$REVIEW_GUIDELINES" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
