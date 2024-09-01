@@ -31,8 +31,8 @@ jobs:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_REVIEWER.EXTRA_INSTRUCTIONS: |
-            Please use Japanese. 
+            Answer in japanese. 
             ${{ env.REVIEW_GUIDELINES }}
           PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: |
-            Please use Japanese. 
+            Answer in japanese. 
             ${{ env.REVIEW_GUIDELINES }}
