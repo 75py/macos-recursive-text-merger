@@ -47,7 +47,7 @@ struct ContentView: View {
             Button(action: {
                 viewModel.selectFolder()
             }) {
-                Text("フォルダを選択")
+                Text("フォルダを選択する")
             }
 
             if let folder = viewModel.selectedFolder {
